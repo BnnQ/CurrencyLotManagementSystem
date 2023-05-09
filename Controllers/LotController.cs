@@ -20,34 +20,40 @@ public class LotController : Controller
     private readonly SelectList currencies;
     private readonly UserManager<User> userManager;
     private readonly IMapper mapper;
+    private readonly ILogger<LotController> logger;
 
-    public LotController(ILotManager lotManager, UserManager<User> userManager, IMapper mapper)
+    public LotController(ILotManager lotManager, UserManager<User> userManager, IMapper mapper, ILoggerFactory loggerFactory)
     {
         this.lotManager = lotManager;
         currencies = new SelectList(Enum.GetValues<Currency>());
         
         this.userManager = userManager;
         this.mapper = mapper;
+        logger = loggerFactory.CreateLogger<LotController>();
     }
 
     [HttpGet]
     [RetrieveModelErrorsFromRedirector]
-    public IActionResult List(Currency? currency)
+    public IActionResult List()
     {
         ViewBag.Currencies = currencies;
-        return View(currency is not null ? lotManager.GetByCurrencyAsync(currency.Value) : new List<Lot>());
+        logger.LogInformation("[GET] List: returning view");
+        return View();
     }
     
     [HttpPost]
     public async Task<IActionResult> GetLotsByCurrency(Currency currency)
     {
-        return PartialView(viewName: "_Lots", await lotManager.GetByCurrencyAsync(currency));
+        const string PartialViewName = "_Lots";
+        logger.LogInformation("[POST] GetLotsByCurrency: returning {PartialViewName} partial view", PartialViewName);
+        return PartialView(viewName: PartialViewName, await lotManager.GetByCurrencyAsync(currency));
     }
     
     [HttpGet]
     public IActionResult Create()
     {
         ViewBag.Currencies = currencies;
+        logger.LogInformation("[GET] Create: returning view");
         return View(new CreationViewModel());
     }
 
@@ -56,12 +62,14 @@ public class LotController : Controller
     {
         if (!ModelState.IsValid)
         {
+            logger.LogWarning("[POST] Create: model contains errors, returning view");
             return View(creationViewModel);
         }
         
         var user = await GetCurrentUserAsync();
         if (user is null)
         {
+            logger.LogWarning("[POST] Create: for some reason, unable to get the current user, returning 404 Not Found");
             return NotFound();
         }
 
@@ -70,6 +78,7 @@ public class LotController : Controller
         lot.SellerSurname = user.Surname;
 
         await lotManager.AddAsync(lot);
+        logger.LogInformation("[POST] Create: successfully created lot by user {UserName}", user.UserName);
         return RedirectToList();
     }
     
@@ -80,12 +89,14 @@ public class LotController : Controller
         try
         {
             await lotManager.DeleteAsync(lotId, popReceipt);
+            logger.LogInformation("[POST] Buy: successfully buyed lot {LotId} by user {UserName}", lotId, User.Identity?.Name);
         }
         catch
         {
             ModelState.AddSummaryError("The time has expired to buy the lot.");
         }
         
+        logger.LogWarning("[POST] Buy: unsuccessful lot {LotId} purchase by user {UserName} because the time to buy the lot has expired, redirecting to list", lotId, User.Identity?.Name);
         return RedirectToList();
     }
 
