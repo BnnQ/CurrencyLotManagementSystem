@@ -1,0 +1,78 @@
+@model LoginViewModel
+
+@section Styles {
+    <link rel="stylesheet" href="~/scss/account.css"/>
+    <link rel="stylesheet" href="~/scss/login.css"/>
+}
+
+<div id="body" class="d-flex flex-column align-items-center justify-content-center min-vh-100">
+    <div id="form-wrapper" class="container-fluid">
+        <h1 class="text-center fw-bold mb-4" style="font-size: 40px">Welcome to Loternos</h1>
+        <div class="pb-3">
+            <a asp-action="Register" class="btn btn-primary btn-block create-btn">
+                <i class="fa-solid fa-user-plus me-1"></i>
+                Sign up
+            </a>
+        </div>
+        <div class="or">
+            <div class="or-line"></div>
+            <div class="or-or">
+                <span>OR</span>
+            </div>
+        </div>
+        
+        <form method="POST" asp-action="Login">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <p class="fs-6 fw-bold" style="margin: 0 0 -5px 0">Login</p>
+            <div class="input-container row g-2 gap-2">
+                <div class="login-input-group col-sm-12 col-md-3">
+                    <div class="login-input-group-icon">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="login-input-group-input col-sm-12 col-md-3">
+                        <input asp-for="UserName" placeholder="Nickname"/>
+                    </div>
+                </div>
+                <div class="login-input-group col-sm-12 col-md-3">
+                    <div class="login-input-group-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <div class="login-input-group-input">
+                        <input type="password" asp-for="Password" placeholder="••••••••"/>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-2 p-0">
+                    <button asp-action="Login" type="submit" class="btn btn-primary text-nowrap fw-bold w-100" style="border-radius: 2px; padding: 7px 0;  font-size:  18px">
+                        <i class="fas fa-lock me-1"></i>
+                        Login
+                    </button>
+                </div>
+            </div>
+        </form>
+        
+        <div class="external-login-providers-container d-flex flex-column gap-2 mt-4">
+            <a asp-action="ExternalLogin" asp-route-provider="Google" class="btn btn-danger d-flex justify-content-center align-items-center fw-bold" style="font-size: 18px">
+                        <i class="fa-brands fa-google me-3"></i>
+                        Sign in with Google
+                    </a>
+                    <a asp-action="ExternalLogin" asp-route-provider="GitHub" class="btn btn-dark d-flex justify-content-center align-items-center fw-bold" style="font-size: 18px">
+                        <i class="fa-brands fa-github me-3"></i>
+                        Sign in with GitHub
+                    </a>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts
+{
+    <script type="text/javascript">
+    $(function() {
+        const inputs = $('input[type="text"], input[type="password"]'); 
+        inputs.on('keyup', function () {
+            inputs.removeClass('input-validation-error');
+            $('.text-danger').hide();
+        });
+        });
+    </script>
+}

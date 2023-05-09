@@ -1,0 +1,71 @@
+.lot {
+  background-color: #2D3943;
+  color: #f8f9fa;
+  display: flex;
+  align-items: center;
+  max-width: 100%;
+  border-radius: 3px;
+  border-top-right-radius: 2px !important;
+  border-bottom-right-radius: 2px !important;
+}
+
+.lot-body {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+a.lot-body {
+  text-decoration: none;
+  color: inherit;
+}
+
+a.lot-body:hover {
+  background-color: #47535D;
+}
+
+.lot-info {
+  padding: 12px 12px;
+  max-width: calc(100% - 60px);
+  height: 100%;
+}
+
+.lot-name {
+  font-weight: 700;
+  font-size: 22px;
+  margin-right: 4px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+.lot-title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  max-width: 100%;
+}
+
+.lot-buy {
+  width: 45px;
+  border-radius: 3px;
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+  background-color: #198754;
+  align-self: stretch;
+  font-size: 20px;
+}
+
+.lot-buy button {
+  color: #f8f9fa;
+  font-size: 18px;
+  height: 100%;
+  text-align: center;
+}
+
+.lot-remove:hover {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.08));
+}
+
+/*# sourceMappingURL=lot.css.map */

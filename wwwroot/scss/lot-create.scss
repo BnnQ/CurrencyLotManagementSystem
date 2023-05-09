@@ -1,0 +1,16 @@
+#wrapper {
+  width: 100%;
+  max-width: 1000px;
+  min-width: 250px;
+}
+
+@import "variables";
+.notice {
+  background: $secondary;
+  color: $light;
+  font-size: 12px;
+  padding: 5px 6px 4px;
+  border-radius: 2px;
+  margin-top: 16px;
+  font-weight: $font-weight-bold;
+}

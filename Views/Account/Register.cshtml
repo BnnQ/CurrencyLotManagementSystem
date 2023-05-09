@@ -1,0 +1,111 @@
+@model RegistrationViewModel
+
+@section Styles {
+    <link rel="stylesheet" href="~/scss/account.css"/>
+    <link rel="stylesheet" href="~/scss/register.css"/>
+}
+
+<div id="body" class="d-flex flex-column align-items-center justify-content-center min-vh-100">
+    <div id="form-wrapper" class="container-fluid">
+        <h1 class="text-center fw-bold mb-4" style="font-size: 40px">Create your account</h1>
+        
+        <div class="external-login-providers-container d-flex flex-column gap-2 mt-4">
+                    <a asp-action="ExternalLogin" asp-route-provider="Google" class="btn btn-danger d-flex justify-content-center align-items-center fw-bold" style="font-size: 18px">
+                                <i class="fa-brands fa-google me-3"></i>
+                                Sign up with Google
+                            </a>
+                            <a asp-action="ExternalLogin" asp-route-provider="GitHub" class="btn btn-dark d-flex justify-content-center align-items-center fw-bold" style="font-size: 18px">
+                                <i class="fa-brands fa-github me-3"></i>
+                                Sign up with GitHub
+                            </a>
+                </div>
+        
+        <div class="or">
+            <div class="or-line"></div>
+            <div class="or-or">
+                <span>OR</span>
+            </div>
+        </div>
+
+        <form method="POST" asp-action="Register">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="input-container d-flex flex-column gap-2">
+                <div class="input-label">Choose a nickname</div>
+                <div class="login-input-group">
+                    <div class="login-input-group-icon">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="login-input-group-input">
+                        <input asp-for="UserName" placeholder="Nickname"/>
+                    </div>
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+
+                <div class="input-label">Password</div>
+                <div class="login-input-group">
+                    <div class="login-input-group-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <div class="login-input-group-input">
+                        <input asp-for="Password" placeholder="••••••••••••••••"/>
+                    </div>
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+
+                <div class="input-label">Retype Password</div>
+                <div class="login-input-group">
+                    <div class="login-input-group-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <div class="login-input-group-input">
+                        <input asp-for="ConfirmPassword" placeholder="••••••••••••••••"/>
+                    </div>
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                </div>
+
+                <div class="input-label">Email</div>
+                <div class="login-input-group">
+                    <div class="login-input-group-icon">
+                        <i class="fa-solid fa-envelope"></i>
+                    </div>
+                    <div class="login-input-group-input">
+                        <input asp-for="Email" placeholder="Email"/>
+                    </div>
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="input-label">Surname</div>
+                <div class="login-input-group">
+                    <div class="login-input-group-icon">
+                        <i class="fa-solid fa-id-card"></i>
+                    </div>
+                    <div class="login-input-group-input">
+                        <input asp-for="Surname" placeholder="Surname"/>
+                    </div>
+                    <span asp-validation-for="Surname" class="text-danger"></span>
+                </div>
+
+                <div class="mt-3">
+                    <button type="submit" class="btn btn-primary text-nowrap fw-bold w-100" style="border-radius: 2px; padding: 7px 0;  font-size: 20px">
+                        <i class="fas fa-lock me-1"></i>
+                        Sign up
+                    </button>
+                </div>
+                
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script type="text/javascript">
+    $(function() {
+        const inputs = $('input[type="text"], input[type="password"]'); 
+        inputs.on('keyup', function () {
+            inputs.removeClass('input-validation-error');
+            $('.text-danger').hide();
+        });
+        });
+    </script>
+}

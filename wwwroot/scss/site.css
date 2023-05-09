@@ -1,0 +1,93 @@
+html {
+  position: relative;
+}
+
+html, body {
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+* {
+  font-family: "Play", sans-serif;
+}
+
+header {
+  height: 120px;
+}
+
+body > nav {
+  top: 128px !important;
+}
+
+header > nav {
+  padding: 0 !important;
+}
+
+header, header nav, header div {
+  background-color: #2d3943;
+}
+
+.navbar-brand {
+  width: 250px;
+  height: 50px;
+  padding: 32px !important;
+}
+
+header img {
+  height: 200px;
+  width: 300px;
+  object-fit: cover;
+  display: flex;
+  align-items: center;
+}
+
+.btn-primary {
+  color: white !important;
+}
+
+@media (max-width: 575.98px) {
+  .navbar-brand {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    flex-grow: 1;
+    justify-content: center;
+  }
+  header > .navbar > .container-fluid {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    justify-content: center;
+  }
+}
+.btn, .form-control, .form-select {
+  border-radius: 3px !important;
+}
+
+.btn-no-text {
+  padding: 8px 10px;
+  line-height: 1em;
+  box-sizing: content-box;
+  height: 1em;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  width: 1em;
+  align-items: center;
+}
+
+.btn-block {
+  width: 100%;
+  flex-shrink: 1;
+  font-size: 28px;
+}
+
+#btn-log-out {
+  color: #f8f9fa !important;
+  text-decoration: none !important;
+  transition: all 0.2s ease-in-out;
+  font-size: 1.25rem;
+}
+#btn-log-out:hover {
+  color: #2b87d3 !important;
+}
+
+/*# sourceMappingURL=site.css.map */

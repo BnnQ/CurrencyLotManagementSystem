@@ -1,0 +1,43 @@
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using System.Text
+@model CurrencyLotManagementLibrary.Models.Entities.Lot
+@{
+    StringBuilder concatenetedNameAndSurnameBuilder = new(Model.SellerNickname);
+    if (!string.IsNullOrWhiteSpace(Model.SellerSurname))
+    {
+        concatenetedNameAndSurnameBuilder.Append($" ({Model.SellerSurname})");
+    }
+
+    var concatenetedNameAndSurname = concatenetedNameAndSurnameBuilder.ToString();
+}
+
+<div class="col-12 col-xxl-6">
+    <div class="lot">
+        <div class="lot-body">
+            <div class="lot-info">
+                <div class="lot-title">
+                    <div class="lot-name">
+                        @($"{Model.Amount} {Model.Currency}")
+                    </div>
+                </div>
+                <div class="lot-details">
+
+                    <div class="text-nowrap text-truncate" data-bs-toggle="tooltip" title="@concatenetedNameAndSurname">
+                        <i class="fas fa-user"></i> @concatenetedNameAndSurname
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="lot-buy">
+            <form method="POST" asp-action="Buy" class="h-100">
+                <input type="hidden" name="lotId" value="@Model.Id"/>
+                <input type="hidden" name="popReceipt" value="@Model.PopReceipt"/>
+                <button class="btn d-flex justify-content-center align-items-center text-center border-0 @(User.Identity?.Name == Model.SellerNickname ? "disabled" : string.Empty)">
+                    <i class="fas fa-shopping-cart"></i>
+                </button>
+            </form>
+        </div>
+
+    </div>
+</div>

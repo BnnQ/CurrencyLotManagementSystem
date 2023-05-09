@@ -1,0 +1,89 @@
+@import "bootstrap";
+.login-input-group:has(> .login-input-group-input .input-validation-error) {
+  @extend .border;
+  @extend .border-danger;
+  border-width: 2px !important;
+}
+
+
+@import "variables";
+#body {
+  background-color: $secondary;
+  color: white;
+}
+
+.login-input-group {
+  padding: 8px;
+  display: flex;
+  color: $dark;
+  border-radius: 2px;
+  flex-grow: 1;
+  flex-shrink: 1;
+  align-items: center;
+}
+
+.login-input-group, .login-input-group-input input {
+  background-color: $light;
+}
+
+.login-input-group-icon {
+  margin-right: 8px;
+  font-size: 16px;
+}
+
+.login-input-group-input {
+  flex-grow: 1;
+}
+@include media-breakpoint-down(md) {
+  .login-input-group-input {
+    width: auto!important;
+  }
+}
+
+
+.login-input-group-input input {
+  box-sizing: border-box;
+  width: 100%;
+}
+
+input,
+input:focus-visible {
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+input::placeholder {
+  color: gray;
+  font-weight: $font-weight-bold;
+}
+
+@media (min-width: 600px) {
+  #form-wrapper {
+    max-width: 600px;
+    width: 100%;
+  }
+}
+
+.or {
+  padding: 24px 0;
+}
+
+.or-line {
+  text-align: center;
+  font-weight: $font-weight-bold;
+  border-top: 3px solid $light;
+}
+
+.or-or {
+  margin-top: -12px;
+  text-align: center;
+}
+
+.or-or span {
+  line-height: 22px;
+  font-size: 18px;
+  font-weight: $font-weight-bold;
+  background-color: $secondary;
+  padding: 0 6px;
+}

@@ -1,0 +1,32 @@
+h1 {
+  font-size: 48px;
+  padding: 10px 18px;
+}
+
+.btn:has(> .fa-pencil-alt), .btn:has(> .fa-times) {
+  padding: 8px 10px;
+  font-size: 18px;
+  box-sizing: content-box;
+  width: 1em;
+  height: 1em;
+  border: none;
+}
+
+.btn:has(> .fa-pencil-alt):hover, .btn:has(> .fa-plus):hover {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.08));
+}
+
+.btn:has(> .fa-plus) {
+  border-radius: 3px;
+  font-size: 18px;
+}
+
+.alert-danger-message {
+  background-color: #dc3545;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 2px;
+  font-weight: 700;
+}
+
+/*# sourceMappingURL=list.css.map */

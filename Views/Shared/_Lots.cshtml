@@ -1,0 +1,19 @@
+@model IEnumerable<CurrencyLotManagementLibrary.Models.Entities.Lot>
+
+@if (!Model.Any())
+{
+    <h5 class="text-center fw-bold">Lots not found.</h5>
+}
+else
+{
+    for (int i = 0, length = Model.Count(); i < length; i += 2)
+    {
+        <div class="row g-3 py-2">
+            <partial name="_Lot" model="Model.ElementAt(i)"/>
+            @if (i + 1 < length)
+            {
+                <partial name="_Lot" model="@(Model.ElementAt(i + 1))"/>
+            }
+        </div>
+    }
+}

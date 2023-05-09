@@ -1,0 +1,64 @@
+@model CreationViewModel
+@section Styles {
+    <link rel="stylesheet" href="~/scss/lot-create.css"/>
+}
+
+@{
+    Layout = "_LotLayout";
+}
+
+<div id="body" class="d-flex flex-column align-items-center justify-content-center min-vh-100">
+    <div id="wrapper" class="container-fluid">
+        <h1 class="text-center text-primary fw-bold mb-3">Adding lot</h1>
+        <div class="row justify-content-center">
+            <div class="col-10">
+                <form asp-action="Create" method="post" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group mb-3">
+                        <label asp-for="Currency" class="control-label"></label>
+                        <select asp-for="Currency" class="form-select" asp-items="ViewBag.Currencies"></select>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="Amount" class="control-label"></label>
+                        <input asp-for="Amount" autocomplete="off" class="form-control"/>
+                        <span asp-validation-for="Amount" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="ExpirationTime" class="control-label"></label>
+                        <input asp-for="ExpirationTime" autocomplete="off" class="form-control"/>
+                        <span asp-validation-for="ExpirationTime" class="text-danger"></span>
+                    </div>
+                    <div class="notice mb-3">
+                        The lot cannot be changed or deleted before the expiration date.
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary d-flex justify-content-center align-items-center text-center fw-bold mb-2 w-100">
+                            <i class="fa-solid fa-plus me-2"></i>
+                            Add
+                        </button>
+                        <a class="btn btn-secondary w-100" asp-action="List">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+    function validateTimeSpan(timeSpan) {
+        const timeSpanPattern = /^([0-9]{1}|(?:0[0-9]|1[0-9]|2[0-3])+):([0-5]?[0-9])(?::([0-5]?[0-9])(?:.(\d{1,9}))?)?$/gm;
+        return timeSpan.match(timeSpanPattern);
+    }
+    
+    $(() => {
+        const defaultTimeSpanValue = "00:00:00";
+        $("#ExpirationTime").on("input", function () { 
+            if (!validateTimeSpan($(this).val())) {
+                $(this).val(defaultTimeSpanValue);
+            }
+        });
+    });
+    
+    </script>
+}

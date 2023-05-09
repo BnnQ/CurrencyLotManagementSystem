@@ -1,0 +1,82 @@
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+
+@section Styles {
+    <link rel="stylesheet" href="~/scss/lot.css"/>
+    <link rel="stylesheet" href="~/scss/list.css"/>
+    <link rel="stylesheet" href="~/scss/lot-list.css"/>
+}
+
+@{
+    Layout = "_LotLayout";
+}
+
+<div id="body" class="d-flex flex-column align-items-center justify-content-center min-vh-100">
+    <div id="wrapper" class="container-fluid">
+        <h1 class="text-center text-primary fw-bold">Lots</h1>
+        <div class="d-flex align-items-center justify-content-center">
+            <select id="currencySelectList" class="form-select w-50 fw-bold text-center" asp-items="ViewBag.Currencies">
+                <option value="" selected disabled>--Please select a currency--</option>
+            </select>
+        </div>
+        <div class="d-flex justify-content-end align-items-center mb-2">
+            <a class="btn btn-primary d-flex justify-content-center align-items-center text-center fw-bold ms-2" asp-controller="Lot" asp-action="Create">
+                <i class="fa-solid fa-plus me-2"></i>
+                Add lot
+            </a>
+        </div>
+        <div id="lots-container" class="container-fluid p-0">
+
+        </div>
+    </div>
+</div>
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="toast-container position-fixed" style="top: 50px; left: 50%; transform: translateX(-50%)">
+        <div id="errorToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="width: 600px!important">
+            <div class="toast-header bg-danger">
+                <strong class="me-auto text-light">Error</strong>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                <div asp-validation-summary="ModelOnly"></div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    <script type="text/javascript">
+        const toastElement = document.getElementById("errorToast");
+        if (toastElement) {
+            const toast = new bootstrap.Toast(toastElement, { delay: 7000 });
+            toast.show();
+        }
+    </script>
+
+    <script type="text/javascript">
+        function getLots(currency) {
+        $.post("https://localhost:7133/Lot/GetLotsByCurrency/", { currency: currency }, function (data) {
+                $("#lots-container").html(data);
+            });
+        } 
+        
+        $(function () {
+            const interval = 11000;
+            let intervalId;
+            
+            const currencySelectList = $("#currencySelectList");
+            currencySelectList.on('change', () => {
+            clearInterval(intervalId);
+            const currency = currencySelectList.val();
+            
+            getLots(currency);
+            intervalId = setInterval(function () {
+             getLots(currency);
+            }, interval);
+            
+            });
+        });
+    
+    </script>
+}
