@@ -2,7 +2,7 @@
 
 CurrencyLotManagementSystem is a web application designed to provide a comfortable platform for buying and selling currency. It allows users to easily manage their currency lots, making the process of currency exchange simple and efficient.
 
-The application is built with ASP.NET Core 6 MVC, a modern, fast, and powerful platform for creating cloud applications. It leverages Azure Queues to ensure reliable message delivery, making the process of buying and selling currency smooth and reliable.
+The application is built with ASP.NET Core 6 MVC, a modern, fast, and powerful platform for creating cloud applications. It leverages Azure Queues to ensure reliable message delivery, making the process of buying and selling currency smooth and reliable. It also uses custom own written [library](https://github.com/BnnQ/CurrencyLotManagementLibrary).
 
 Despite its powerful features, CurrencyLotManagementSystem stands out for its beautiful design and simplicity of use. Whether you're a currency trader or just someone looking to exchange currency, CurrencyLotManagementSystem provides a user-friendly interface that makes currency exchange a breeze.
 
